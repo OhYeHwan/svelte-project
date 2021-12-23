@@ -3,16 +3,25 @@
   import GameItemList from "../components/GameItemList.svelte";
   import Header from "../components/Header.svelte";
   import SummonerNotFound from "../components/SummonerNotFound.svelte";
+  import { users } from "../store";
+  import { beforeUpdate } from "svelte";
 
   export let params = {};
-  console.log(params.username);
+  let user = {};
+
+  beforeUpdate(() => {
+    user = $users.filter((user) => user.user_name === params.username);
+  });
 </script>
 
 <main>
   <Header />
-  <SummonerNotFound />
-  <SummonerInfo />
-  <GameItemList />
+  {#if user.length === 0}
+    <SummonerNotFound />
+  {:else}
+    <SummonerInfo user_name={user[0].user_name} user_info={user[0].user_info} />
+    <GameItemList match_list={user[0].match_list} />
+  {/if}
 </main>
 
 <style>
