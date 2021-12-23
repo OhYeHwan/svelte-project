@@ -1,95 +1,90 @@
 <script>
   export let match;
-  console.log(match);
 </script>
 
-{#if match.result === "win"}
-  <div class="win">
-    <div class="GameStats">
-      <div class="GameType">일반</div>
-      <div class="TimeStamp">2달전</div>
-      <div class="Bar" />
-      <div class="GameResult">승리</div>
-      <div class="GameLength">17분 52초</div>
+<div class={match.result === "win" ? "win" : "lose"}>
+  <div class="GameStats">
+    <div class="GameType">일반</div>
+    <div class="TimeStamp">2달전</div>
+    <div class="Bar" />
+    <div class={match.result === "win" ? "GameResultWin" : "GameResultLose"}>
+      {match.result === "win" ? "승리" : "패배"}
     </div>
-    <div class="wrapper">
-      <div class="GameSettingInfo">
+    <div class="GameLength">17분 52초</div>
+  </div>
+  <div class="wrapper">
+    <div class="GameSettingInfo">
+      <div>
+        <img
+          class="champ"
+          src={`img/${match.champion}.png`}
+          alt={match.champion}
+        />
+      </div>
+      <div>
         <div>
-          <img src={`img/${match.champion}.png`} alt={match.champion} />
+          <img
+            class="spell"
+            src={`img/${match.spell1}.png`}
+            alt={match.spell1}
+          />
         </div>
         <div>
-          <div>
-            <img
-              class="spell"
-              src={`img/${match.spell1}.png`}
-              alt={match.spell1}
-            />
-          </div>
-          <div>
-            <img
-              class="spell"
-              src={`img/${match.spell2}.png`}
-              alt={match.spell2}
-            />
-          </div>
+          <img
+            class="spell"
+            src={`img/${match.spell2}.png`}
+            alt={match.spell2}
+          />
+        </div>
+      </div>
+      <div>
+        <div>
+          <img class="rune" src={`img/${match.rune1}.png`} alt={match.rune1} />
         </div>
         <div>
-          <div>
-            <img
-              class="rune"
-              src={`img/${match.rune1}.png`}
-              alt={match.rune1}
-            />
-          </div>
-          <div>
-            <img
-              class="rune"
-              src={`img/${match.rune2}.png`}
-              alt={match.rune2}
-            />
-          </div>
+          <img class="rune" src={`img/${match.rune2}.png`} alt={match.rune2} />
         </div>
       </div>
-      <div class="champ_name">{match.champion}</div>
     </div>
-    <div class="KDA_container">
-      <div class="KDA">
-        {match.kill} / <span class="KDA_death">{match.death}</span> / {match.assist}
-      </div>
-      <div class="KDARatio">
-        {((match.kill + match.assist) / match.death).toFixed(2)} 평점
-      </div>
+    <div class="champ_name">{match.champion}</div>
+  </div>
+  <div class="KDA_container">
+    <div class="KDA">
+      {match.kill} / <span class="KDA_death">{match.death}</span> / {match.assist}
     </div>
-    <div class="Stats">
-      <div class="Level">레벨 {match.level}</div>
-      <div class="CS">{match.cs} CS</div>
-    </div>
-    <div class="ItemListWrapper">
-      <div class="ItemList">
-        <div class="Item" />
-        <div class="Item" />
-        <div class="Item" />
-        <div class="Item" />
-        <div class="Item" />
-        <div class="Item" />
-        <div class="Item" />
-      </div>
+    <div class="KDARatio">
+      {((match.kill + match.assist) / match.death).toFixed(2)} 평점
     </div>
   </div>
-{:else}
-  <div class="lose" />
-{/if}
+  <div class="Stats">
+    <div class="Level">레벨 {match.level}</div>
+    <div class="CS">{match.cs} CS</div>
+  </div>
+  <div class="ItemListWrapper">
+    <div class="ItemList">
+      <div class="Item" />
+      <div class="Item" />
+      <div class="Item" />
+      <div class="Item" />
+      <div class="Item" />
+      <div class="Item" />
+      <div class="Item" />
+    </div>
+  </div>
+</div>
 
 <style>
   .win {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 690px;
     height: 98px;
     background-color: rgb(172, 206, 233);
   }
 
   .lose {
+    display: flex;
+    justify-content: space-around;
     width: 690px;
     height: 98px;
     background-color: rgb(219, 184, 180);
@@ -115,8 +110,12 @@
     font-weight: bold;
   }
 
-  .GameResult {
+  .GameResultWin {
     color: #1a78ae;
+  }
+
+  .GameResultLose {
+    color: #c64433;
   }
 
   .Bar {
@@ -131,6 +130,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
+  }
+
+  .champ {
+    margin-right: 5px;
   }
 
   .spell,
@@ -142,7 +146,6 @@
   }
 
   .champ_name {
-    margin-top: 2px;
     font-size: 13px;
     color: #555;
     font-weight: bold;

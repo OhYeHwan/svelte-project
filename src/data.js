@@ -3,7 +3,7 @@ const Data = [
     user_name: "급발진간다",
     user_info: {
       ranking: "650,888",
-      tier: "platinum",
+      tier: "Platinum",
       tier_num: 4,
       point: 0,
       win: 140,
@@ -118,7 +118,7 @@ const Data = [
         result: "lose",
         champion: "Shaco",
         spell1: "Ignite",
-        spell2: "탈진",
+        spell2: "Exhaust",
         rune1: "Dark_Harvest_rune",
         rune2: "Precision",
         level: 20,

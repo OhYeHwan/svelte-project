@@ -1,12 +1,13 @@
 <script>
   import { push } from "svelte-spa-router";
 
-  let user_name;
+  let user_name = "";
   export let size = "normal";
 
   const searchUser = (e) => {
     e.preventDefault();
     push(`/summoner/${user_name}`);
+    user_name = "";
   };
 </script>
 
@@ -14,9 +15,6 @@
   <input
     type="text"
     bind:value={user_name}
-    on:keydown={(e) => {
-      e.key === "Enter" && searchUser(e);
-    }}
     placeholder="소환사명, 소환사명, ..."
   />
   <button class={`button__${size}`} on:click={searchUser}> .GG </button>
